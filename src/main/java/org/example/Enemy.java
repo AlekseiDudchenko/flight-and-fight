@@ -2,13 +2,13 @@ package org.example;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 import java.util.Random;
 
 public class Enemy {
 
     private int x, y, width, height;
     private int speed = 1;
+    private final int MAX_SPEED = 3;
 
     private Color color;
 
@@ -26,6 +26,9 @@ public class Enemy {
         this.visalbe = visalbe;
         if (visalbe) {
             color = getRandomColor();
+            if (color.equals(Color.BLUE)) {
+                color = getRandomColor();
+            }
         }
     }
 
@@ -37,6 +40,7 @@ public class Enemy {
         this.y = y;
         this.width = width;
         this.height = height;
+        color = getRandomColor();
     }
 
     public void draw(Graphics g) {
@@ -51,7 +55,7 @@ public class Enemy {
             y = 0;
             x = (int) (Math.random() * 750);
             setVisalbe(true);
-            speed += 1;
+            speed = (int) ((Math.random() * (MAX_SPEED - 1)) + 1);
         }
 
         y += speed;
@@ -59,6 +63,7 @@ public class Enemy {
             y = 0;
             x = (int) (Math.random() * 750);
             setVisalbe(true);
+            speed = (int) ((Math.random() * (MAX_SPEED - 1)) + 1);
         }
     }
 
@@ -87,6 +92,14 @@ public class Enemy {
 
     public int getHeight() {
         return height;
+    }
+
+    public int getX2() {
+        return x + width;
+    }
+
+    public int getY2() {
+        return y + height;
     }
 
     public static Color getRandomColor() {

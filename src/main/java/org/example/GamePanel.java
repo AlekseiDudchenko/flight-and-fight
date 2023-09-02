@@ -10,23 +10,11 @@ import java.util.ArrayList;
 // The GamePanel class - where the game and drawing happens
 class GamePanel extends JPanel implements ActionListener {
     private Player player;
-
     private GameKeyAdapter gameKeyAdapter;
-
-    public Player getPlayer() {
-        return player;
-    }
-
-    public Enemy getEmeny() {
-        return emeny;
-    }
-
-    public ArrayList<Bullet> getBullets() {
-        return bullets;
-    }
-
     private Enemy emeny;
     private ArrayList<Bullet> bullets;
+
+    private int enemiesKilled = 0;
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(800, 600));
@@ -37,18 +25,6 @@ class GamePanel extends JPanel implements ActionListener {
         bullets = new ArrayList<>();
         gameKeyAdapter = new GameKeyAdapter(this);
         addKeyListener(gameKeyAdapter);
-
-//        addKeyListener(new KeyAdapter() {
-//            @Override
-//            public void keyPressed(KeyEvent e) {
-//                player.handleKeyPress(e);
-//
-//                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-//                    Bullet newBullet = new Bullet(player.getX() + 20, player.getY(), 5, 10);
-//                    bullets.add(newBullet);
-//                }
-//            }
-//        });
 
         setFocusable(true);
         requestFocusInWindow();
@@ -77,7 +53,17 @@ class GamePanel extends JPanel implements ActionListener {
                 bullet.getY() + bullet.getHeight() > emeny.getY() &&
                 bullet.getY() < emeny.getY() + emeny.getHeight()) {
                 emeny.setVisalbe(false);
+                enemiesKilled += 1;
             }
+        }
+
+        // Collision detection with player
+        if (emeny.getX2() > player.getX() && emeny.getX() < player.getX2() &&
+            emeny.getY2() > player.getY() && emeny.getY() < player.getY2()) {
+            player.setVisable(false);
+            enemiesKilled = 0;
+
+
         }
 
         repaint();
@@ -92,5 +78,23 @@ class GamePanel extends JPanel implements ActionListener {
         for (Bullet bullet : bullets) {
             bullet.draw(g);
         }
+
+
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Helvetica", Font.PLAIN, 24));
+        g.drawString(String.valueOf(enemiesKilled), 20,40);
+
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Enemy getEmeny() {
+        return emeny;
+    }
+
+    public ArrayList<Bullet> getBullets() {
+        return bullets;
     }
 }
