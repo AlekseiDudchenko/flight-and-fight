@@ -9,19 +9,23 @@ import java.util.ArrayList;
 
 // The GamePanel class - where the game and drawing happens
 class GamePanel extends JPanel implements ActionListener {
+
     private Player player;
     private GameKeyAdapter gameKeyAdapter;
-    private Enemy emeny;
+    private Enemy enemy;
     private ArrayList<Bullet> bullets;
+    private int windowWidth = 800;
+    private int windowHeight = 600;
+
 
     private int enemiesKilled = 0;
 
     public GamePanel() {
-        this.setPreferredSize(new Dimension(800, 600));
+        this.setPreferredSize(new Dimension(windowWidth, windowHeight));
         new Timer(20, this).start();
 
         player = new Player(50, 400, 50, 50);
-        emeny = new Enemy("1", 100, 100, 50, 50);
+        enemy = new Enemy("1", 100, 100, 50, 50);
         bullets = new ArrayList<>();
         gameKeyAdapter = new GameKeyAdapter(this);
         addKeyListener(gameKeyAdapter);
@@ -32,7 +36,7 @@ class GamePanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        emeny.update();
+        enemy.update();
         player.update(gameKeyAdapter);
 
         if (gameKeyAdapter.getSpacePressed().get()) {
@@ -48,22 +52,28 @@ class GamePanel extends JPanel implements ActionListener {
 
         // Collision detection bullet with enemy
         for (Bullet bullet : bullets) {
-            if (bullet.getX() > emeny.getX() &&
-                bullet.getX() + bullet.getWidth() < emeny.getX() + emeny.getWidth() &&
-                bullet.getY() + bullet.getHeight() > emeny.getY() &&
-                bullet.getY() < emeny.getY() + emeny.getHeight()) {
-                emeny.setVisalbe(false);
+            if (bullet.getX() > enemy.getX() &&
+                bullet.getX() + bullet.getWidth() < enemy.getX() + enemy.getWidth() &&
+                bullet.getY() + bullet.getHeight() > enemy.getY() &&
+                bullet.getY() < enemy.getY() + enemy.getHeight()) {
+                enemy.setVisable(false);
                 enemiesKilled += 1;
             }
         }
 
         // Collision detection with player
-        if (emeny.getX2() > player.getX() && emeny.getX() < player.getX2() &&
-            emeny.getY2() > player.getY() && emeny.getY() < player.getY2()) {
+        if (enemy.getX2() > player.getX() && enemy.getX() < player.getX2() &&
+            enemy.getY2() > player.getY() && enemy.getY() < player.getY2()) {
             player.setVisable(false);
+            enemy.setVisable(false);
             enemiesKilled = 0;
+            player.setHp(player.getHp()-1);
+        }
 
-
+        if (enemy.getY2() >= this.getHeight()) {
+            enemy.setVisable(false);
+            enemiesKilled = 0;
+            player.setHp(player.getHp()-1);
         }
 
         repaint();
@@ -73,16 +83,19 @@ class GamePanel extends JPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         player.draw(g);
-        emeny.draw(g);
+        enemy.draw(g);
 
         for (Bullet bullet : bullets) {
             bullet.draw(g);
         }
 
-
         g.setColor(Color.BLACK);
         g.setFont(new Font("Helvetica", Font.PLAIN, 24));
         g.drawString(String.valueOf(enemiesKilled), 20,40);
+
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Helvetica", Font.PLAIN, 24));
+        g.drawString("HP " + player.getHp(), this.getWidth() - 100, 40);
 
     }
 
@@ -90,8 +103,8 @@ class GamePanel extends JPanel implements ActionListener {
         return player;
     }
 
-    public Enemy getEmeny() {
-        return emeny;
+    public Enemy getEnemy() {
+        return enemy;
     }
 
     public ArrayList<Bullet> getBullets() {

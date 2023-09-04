@@ -46,7 +46,7 @@ class GameKeyAdapter extends KeyAdapter {
 
     public GameKeyAdapter(GamePanel gamePanel) {
         player = gamePanel.getPlayer();
-        emeny = gamePanel.getEmeny();
+        emeny = gamePanel.getEnemy();
         bullets = gamePanel.getBullets();
     }
 //    @Override

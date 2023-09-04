@@ -8,7 +8,7 @@ public class Enemy {
 
     private int x, y, width, height;
     private int speed = 1;
-    private final int MAX_SPEED = 3;
+    private final int MAX_SPEED = 10;
 
     private Color color;
 
@@ -22,7 +22,7 @@ public class Enemy {
         return visalbe;
     }
 
-    public void setVisalbe(boolean visalbe) {
+    public void setVisable(boolean visalbe) {
         this.visalbe = visalbe;
         if (visalbe) {
             color = getRandomColor();
@@ -54,7 +54,7 @@ public class Enemy {
         if (!visalbe) {
             y = 0;
             x = (int) (Math.random() * 750);
-            setVisalbe(true);
+            setVisable(true);
             speed = (int) ((Math.random() * (MAX_SPEED - 1)) + 1);
         }
 
@@ -62,7 +62,7 @@ public class Enemy {
         if (y > 600) {
             y = 0;
             x = (int) (Math.random() * 750);
-            setVisalbe(true);
+            setVisable(true);
             speed = (int) ((Math.random() * (MAX_SPEED - 1)) + 1);
         }
     }

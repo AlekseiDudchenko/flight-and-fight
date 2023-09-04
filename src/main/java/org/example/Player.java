@@ -8,6 +8,8 @@ import java.awt.event.KeyEvent;
 class Player {
     private int x, y, width, height;
 
+    private int hp = 100;
+
     private Color color;
 
     private boolean visable = true;
@@ -91,5 +93,13 @@ class Player {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 }
