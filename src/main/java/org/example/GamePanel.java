@@ -79,6 +79,13 @@ class GamePanel extends JPanel implements ActionListener {
         repaint();
     }
 
+    public void newGame() {
+        player.setVisable(false);
+        enemy.setVisable(false);
+        enemiesKilled = 0;
+        player.setHp(100);
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
