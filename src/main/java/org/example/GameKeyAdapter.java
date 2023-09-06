@@ -1,12 +1,16 @@
 package org.example;
 
+import org.example.actors.Bullet;
+import org.example.actors.Enemy;
+import org.example.actors.Player;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 // The GameKeyAdapter class - for handling keyboard input
-class GameKeyAdapter extends KeyAdapter {
+public class GameKeyAdapter extends KeyAdapter {
 
     private static final int MOVING_STEP = 15;
 

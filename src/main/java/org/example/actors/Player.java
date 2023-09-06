@@ -1,11 +1,13 @@
-package org.example;
+package org.example.actors;
+
+import org.example.GameKeyAdapter;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
 
 // The Player class - representing the player's square
-class Player {
+public class Player {
     private int x, y, width, height;
 
     private int hp = 100;

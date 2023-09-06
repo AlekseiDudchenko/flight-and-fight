@@ -1,5 +1,9 @@
 package org.example;
 
+import org.example.actors.Bullet;
+import org.example.actors.Enemy;
+import org.example.actors.Player;
+
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.awt.*;
@@ -8,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 // The GamePanel class - where the game and drawing happens
-class GamePanel extends JPanel implements ActionListener {
+public class GamePanel extends JPanel implements ActionListener {
 
     private Player player;
     private GameKeyAdapter gameKeyAdapter;

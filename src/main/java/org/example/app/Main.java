@@ -1,5 +1,7 @@
-package org.example;
+package org.example.app;
 
+
+import org.example.GamePanel;
 
 import javax.swing.*;
 
