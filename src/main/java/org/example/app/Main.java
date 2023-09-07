@@ -16,10 +16,6 @@ public class Main  {
         JFrame frame = new JFrame("Simple 2D Game");
 
         GamePanel gamePanel = new GamePanel();
-//        frame.add(gamePanel);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.pack();
-//        frame.setVisible(true);
 
         // Create Menu Items
         JMenuItem newGameItem = new JMenuItem("New Game");
@@ -30,10 +26,6 @@ public class Main  {
             public void actionPerformed(ActionEvent e) {
                 // Logic for starting a new game
                 gamePanel.newGame();
-//                frame.add(gamePanel);
-//                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//                frame.pack();
-//                frame.setVisible(true);
             }
         });
 

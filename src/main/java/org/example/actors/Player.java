@@ -1,6 +1,7 @@
 package org.example.actors;
 
 import org.example.GameKeyAdapter;
+import org.example.GamePanel;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -8,6 +9,9 @@ import java.awt.event.KeyEvent;
 
 // The Player class - representing the player's square
 public class Player {
+
+    public static int initX = GamePanel.windowWidth/2 - 50;
+    public static int initY = 400;
     private int x, y, width, height;
 
     private int hp = 100;
@@ -59,6 +63,11 @@ public class Player {
         } else {
             setVisable(true);
         }
+    }
+
+    public void setPosition(int x, int y){
+        this.x = x;
+        this.y = y;
     }
 
     public int getX() {

@@ -18,9 +18,8 @@ public class GamePanel extends JPanel implements ActionListener {
     private GameKeyAdapter gameKeyAdapter;
     private Enemy enemy;
     private ArrayList<Bullet> bullets;
-    private int windowWidth = 800;
-    private int windowHeight = 600;
-
+    public static int windowWidth = 800;
+    public static int windowHeight = 600;
 
     private int enemiesKilled = 0;
 
@@ -28,7 +27,7 @@ public class GamePanel extends JPanel implements ActionListener {
         this.setPreferredSize(new Dimension(windowWidth, windowHeight));
         new Timer(20, this).start();
 
-        player = new Player(50, 400, 50, 50);
+        player = new Player(Player.initX, Player.initY, 50, 50);
         enemy = new Enemy("1", 100, 100, 50, 50);
         bullets = new ArrayList<>();
         gameKeyAdapter = new GameKeyAdapter(this);
@@ -69,6 +68,7 @@ public class GamePanel extends JPanel implements ActionListener {
         if (enemy.getX2() > player.getX() && enemy.getX() < player.getX2() &&
             enemy.getY2() > player.getY() && enemy.getY() < player.getY2()) {
             player.setVisable(false);
+            player.setPosition(Player.initX, Player.initY);
             enemy.setVisable(false);
             enemiesKilled = 0;
             player.setHp(player.getHp()-1);
@@ -85,6 +85,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void newGame() {
         player.setVisable(false);
+        player.setPosition(Player.initX, Player.initY);
         enemy.setVisable(false);
         enemiesKilled = 0;
         player.setHp(100);
